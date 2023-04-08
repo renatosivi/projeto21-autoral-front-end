@@ -1,8 +1,17 @@
-import { useState } from 'react';
+import GlobalStyles from './assets/styles/GlobalStyles';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import WelcomeScreen from './pages/WelcomeScreen';
 
 function App() {
   return (
-    <h1>A</h1>
+    <>
+      <GlobalStyles/>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/welcome' element={<WelcomeScreen/>}/>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
