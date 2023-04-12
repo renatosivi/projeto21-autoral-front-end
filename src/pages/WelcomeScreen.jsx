@@ -7,9 +7,11 @@ import image5 from '../assets/images/5.jpeg';
 import image6 from '../assets/images/6.jpg';
 import Logo from '../components/Logo';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function WelcomeScreen() {
   const [position, setPosition] = useState(0);
+  const navigate = useNavigate();
 
   function translate() {
     if (position !== 5) setPosition(position + 1);
@@ -54,9 +56,6 @@ export default function WelcomeScreen() {
           <li>
             <p>Let’s get started!!!</p>
           </li>
-          <li>
-            <p>All your favourite MARVEL Movies & Series at one place</p>
-          </li>
         </ul>
         <Logo/>
         <div>
@@ -67,7 +66,11 @@ export default function WelcomeScreen() {
           <div></div>
           <div></div>
         </div>
-        <footer onClick={translate}>Continue</footer>
+          <ContinueButton onClick={translate} position={position}>Continue</ContinueButton>
+          <SignUpAndLoginButton position={position}>
+            <button onClick={() => navigate('/authentication')}>Signup</button>
+            <button onClick={() => navigate('/authentication')}>Login</button>
+          </SignUpAndLoginButton>
       </WelcomeStyles>
     </>
   );
@@ -174,21 +177,57 @@ const WelcomeStyles = styled.main`
       transition: background-color 1s;
     }
   }
+`;
 
-  footer {
-    position: fixed;
-    top: calc(100vh * 670/800);
-    left: calc(50% - 150px);
+const ContinueButton = styled.button`
+  position: fixed;
+  top: calc(100vh * 670/800);
+  left: calc(50% - 150px);
+  width: 300px;
+  height: 50px;
+  background-color: #ED1B24;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 18.3821px;
+  line-height: 22px;
+  color: #FFFFFF;
+  border: 0;
+  box-shadow: 0px 0px 2px 2px #ED1B24;
+  visibility: ${({position}) => position !== 5 ? 'visible' : 'hidden'};
+  opacity: ${({position}) => position !== 5 ? 1 : 0};
+  transition: opacity 0.5s, visibility 0.5s, box-shadow 0.5s;
+
+  :hover {
+    box-shadow: 0px 0px 4px 4px #ED1B24;
+  }
+`;
+
+const SignUpAndLoginButton = styled.footer`
+  position: fixed;
+  top: calc(100vh * 495/800);
+  left: calc(50% - 150px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 32px;
+  
+  button {
     width: 300px;
     height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ED1B24;
+    border: 2px solid #ED1B24;
+    background-color: transparent;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 18.3821px;
     line-height: 22px;
     color: #FFFFFF;
+    visibility: ${({position}) => position === 5 ? 'visible' : 'hidden'};
+    opacity: ${({position}) => position === 5 ? 1 : 0};
+    transition: opacity 3s, box-shadow 0.5s;
+
+    :hover {
+      box-shadow: 0px 0px 4px 4px #ED1B24;
+    }
   }
 `;
