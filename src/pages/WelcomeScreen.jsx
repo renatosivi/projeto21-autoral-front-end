@@ -68,8 +68,8 @@ export default function WelcomeScreen() {
         </div>
           <ContinueButton onClick={translate} position={position}>Continue</ContinueButton>
           <SignUpAndLoginButton position={position}>
-            <button onClick={() => navigate('/authentication')}>Signup</button>
-            <button onClick={() => navigate('/authentication')}>Login</button>
+            <button onClick={() => navigate('/authentication/signup')}>Signup</button>
+            <button onClick={() => navigate('/authentication/login')}>Login</button>
           </SignUpAndLoginButton>
       </WelcomeStyles>
     </>
